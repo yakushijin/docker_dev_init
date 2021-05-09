@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  laravel:
+    container_name: laravel_host
+    restart: always
+    build:
+      context: ./dockerFiles
+      dockerfile: laravel.Dockerfile
+    working_dir: "/root/"
+    tty: true
+    volumes:
+      - ./src:/var/www
+      - ./dockerFiles/confs/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    ports:
+      - 8080:80
+    networks:
+      - docker-net
+
+  mysql:
+    container_name: mysql_host
+    build:
+      context: ./dockerFiles
+      dockerfile: mysql.Dockerfile
+    ports:
+      - 3306:3306
+    expose:
+      - "3306"
+    networks:
+      - docker-net
+
+  redis:
+    container_name: redis_host
+    build:
+      context: ./dockerFiles
+      dockerfile: redis.Dockerfile
+    ports:
+      - 6379:6379
+    expose:
+      - "6379"
+    networks:
+      - docker-net
+
+networks:
+  docker-net:
+    driver: bridge

@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  django:
+    container_name: django_host
+    restart: always
+    build:
+      context: ./dockerFiles
+      dockerfile: django.Dockerfile
+    working_dir: "/root/"
+    tty: true
+    volumes:
+      - ./src:/var/www
+    ports:
+      - 8080:80
+    networks:
+      - docker-net
+
+  postgres:
+    container_name: postgres_host
+    build:
+      context: ./dockerFiles
+      dockerfile: postgres.Dockerfile
+    ports:
+      - 5432:5432
+    expose:
+      - "5432"
+    networks:
+      - docker-net
+
+networks:
+  docker-net:
+    driver: bridge

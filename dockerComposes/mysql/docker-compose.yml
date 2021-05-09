@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  # MySQL
+  mysql:
+    container_name: mysql_host
+    build:
+      context: ./dockerFiles
+      dockerfile: mysql.Dockerfile
+    ports:
+      - 3306:3306
