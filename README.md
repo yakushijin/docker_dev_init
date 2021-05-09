@@ -20,7 +20,7 @@
 ### clone しプロジェクトディレクトリへ移動
 
 ```sh
-git clone https://github.com/yakushijin/docker.git && cd docker
+git clone https://github.com/yakushijin/docker_dev_init.git && cd docker_dev_init
 ```
 
 ### docker-compose.yml 準備
